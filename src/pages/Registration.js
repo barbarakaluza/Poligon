@@ -15,7 +15,13 @@ function Registration() {
   const [name, handleNameChange] = useInput("Basia");
   const [surname, handleSurnameChange] = useInput("Kałuża");
   const [age, handleAgeChange] = useInput("22");
+  const surnameInput = useRef();
 
+  const handleFocusClick = () => {
+    surnameInput.current.focus();
+    surnameInput.current.value = "Kałuża";
+    surnameInput.current.style.border = "#f00 solid 1px";
+  }
   const handleSubmit = (event) => {
     event.preventDefault();
   };
@@ -53,6 +59,10 @@ function Registration() {
           placeholder="age"
           handleChange={handleAgeChange}
         ></Input>
+        <div>
+          <button type="submit" onClick={handleSubmit}>Send</button>
+          <button type="button" onClick={handleFocusClick}>Focus</button>
+        </div>
       </Form>
     </div>
   );
@@ -61,6 +71,7 @@ function Registration() {
 // class Registration extends React.Component {
 //   constructor(props) {
 //     super(props);
+//     this.focusInput = React.createRef();
 //     this.state = {
 //       name: "",
 //       surname: "",
@@ -85,14 +96,19 @@ function Registration() {
 //     const keyName = event.target.name;
 //     this.setState({ [keyName]: event.target.value});
 //   }
+//   handleFocusChange = () => {
+//     this.focusInput.current.focus();
+//     this.focusInput.current.value = 'Nowak';
+//     this.focusInput.current.style.border = '#f00 1px solid';
+//   }
 //   render() {
 //     return (
 //       <form onSubmit={this.handleSubmit}>
 //         <input type="text" name="name" placeholder="Name" onChange={this.handleChange}></input>
-//         <input type="text" name="surname" placeholder="Surname" onChange={this.handleChange}></input>
+//         <input type="text" name="surname" ref={this.focusInput} placeholder="Surname" onChange={this.handleFocusChange}></input>
 //         <input type="text" name="age" placeholder="Age" onChange={this.handleChange}></input>
 //         <button type="submit">Send</button>
-//         <button type="button"></button>
+//         <button type="button">Focus</button>
 //       </form>
 //     );
 //   }
